@@ -102,9 +102,6 @@ export default function apiCalls({
     $finally = () => {}
 })
 {
-    /*
-     *
-     * */
     switch(type)
     {
 	case "get":
@@ -142,5 +139,6 @@ export default function apiCalls({
 	    )();
 	default:
 	    console.log(`This "${type}" operation is wrong! The allowed operations are: [get, create, update, delete]`);
+	    return null;
     }
 }
