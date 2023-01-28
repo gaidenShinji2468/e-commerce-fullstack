@@ -14,7 +14,7 @@ function apiBase({
 	url,
 	data
     })
-    .then(res => resolve(res?.data?.data))
+    .then(res => resolve(res?.data))
     .catch(err => reject(err))
     .finally($finally());
 }

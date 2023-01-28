@@ -1,0 +1,60 @@
+#card-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#card-img {
+    cursor: pointer;
+}
+
+#card-img img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+#card-img figcaption {
+    width: 300px;
+    font-size: 17px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#card-trash {
+    position: relative;
+    top: -165px;
+    right: -308px;
+    cursor: pointer;
+}
+
+#trash {
+    color: gray;
+}
+
+#trash:hover {
+    color: red
+}
+
+#card-img span:nth-child(4) {
+    margin-left: 220px;
+    font-weight: 600;
+}
+
+#cart-total {
+    padding: 8px 4px;
+}
+
+#cart-total span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#cart-total span:nth-child(2) {
+    margin-left: 230px;
+}
+
+#cart-checkout {
+    width: 100%;
+    padding: 10px 0;
+}

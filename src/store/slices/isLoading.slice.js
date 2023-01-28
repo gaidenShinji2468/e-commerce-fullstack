@@ -4,9 +4,7 @@ export const isLoadingSlice = createSlice({
     name: "isLoading",
     initialState: false,
     reducers: {
-        setIsLoading: (state, action) => {
-            return action.payload;
-	}
+        setIsLoading: (state, action) => action.payload
     }
 });
 
