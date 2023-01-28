@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from "react-redux"
-// import { getNewsThunk } from "../store/slices/news.slice"  
+ 
+import { getProductsThunk } from "../store/slices/getProducts.slice"
 import { useEffect } from "react"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 function Products() {
   const dispatch = useDispatch()
-  const product = useSelector( state => state.product )
+  const product = useSelector( state => state.getProducts )
 
   useEffect(() => {
-    dispatch( getNewsThunk() )
+    dispatch( getProductsThunk() )
   }, [] )
   
   return (
@@ -17,21 +18,21 @@ function Products() {
         <h1>Products</h1>
         <Row xs={1} md={2} xl={3}>
           {
-            news?.map(newsItem => (
+            product?.map(producItem => (
           
-          <Col key={newsItem.id}>
+          <Col key={producItem.id}>
             <Card>
               <Card.Img
               variant="top" 
-              src={newsItem.image}
+              src={producItem.productImgs[0]}
               style={{height:200, objectFit:'cover'}}
                />
               <Card.Body>
-                  <Card.Title>{newsItem.headLine}</Card.Title>
+                  <Card.Title>{producItem.title}</Card.Title>
                   <Card.Text>
-                    {newsItem.lead}
+                   <h3>price</h3> {producItem.price}
                   </Card.Text>
-                  <Button variant="primary" as={ Link } to={`/news/${newsItem.id}`}>see</Button>
+                  <Button variant="primary" as={ Link } to={`/product/:${producItem.id}`}>see</Button>
                 </Card.Body>
               </Card>
           </Col>
