@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-function Products() {
+const Products= () => {
   const dispatch = useDispatch()
   const product = useSelector( state => state.getProducts )
 
@@ -32,7 +32,7 @@ function Products() {
                   <Card.Text>
                    <h3>price</h3> {producItem.price}
                   </Card.Text>
-                  <Button variant="primary" as={ Link } to={`/product/:${producItem.id}`}>see</Button>
+                  <Button variant="primary" as={ Link } to={`/product/:${producItem.id}`}>buy</Button>
                 </Card.Body>
               </Card>
           </Col>
