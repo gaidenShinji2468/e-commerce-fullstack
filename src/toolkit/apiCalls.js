@@ -139,10 +139,6 @@ export default function apiCalls({
 	    )();
 	default:
 	    console.log(`This "${type}" operation is wrong! The allowed operations are: [get, create, update, delete]`);
-<<<<<<< HEAD
-	    return null;
-=======
-	return null;
->>>>>>> Romel
+            return null;
     }
 }
