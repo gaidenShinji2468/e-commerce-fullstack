@@ -14,7 +14,7 @@ function apiBase({
 	url,
 	data
     })
-    .then(res => resolve(res?.data?.data))
+    .then(res => resolve(res?.data))
     .catch(err => reject(err))
     .finally($finally());
 }
@@ -139,6 +139,6 @@ export default function apiCalls({
 	    )();
 	default:
 	    console.log(`This "${type}" operation is wrong! The allowed operations are: [get, create, update, delete]`);
-	    return null;
+            return null;
     }
 }
