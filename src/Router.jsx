@@ -15,6 +15,8 @@ function Router()
     const isLoading = useSelector(state => state.isLoading);   
  
     return (
+        
+     
         <BrowserRouter>
 	    <Navbar/>
 	    {isLoading && <Loader/>}
