@@ -1,21 +1,15 @@
-import {
-    BrowserRouter,
-    Routes,
-    Route
-    
-} from "react-router-dom";
-
+import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Products from "./pages/Products";
 import Navbar from "./components/Navbar";
-import BurguerButton from "./components/BurguerButton";
+import Footer from "./components/Footer"
 import "./App.css";
+
 
 function Router()
 {
     return (
         
-    <div>
-      
+    <div>  
         <BrowserRouter>
 	        <Routes>
 	         <Route
@@ -25,11 +19,10 @@ function Router()
 	        </Routes>
 	    </BrowserRouter>
         <Navbar/>
-        <BurguerButton/>
-        
-        
 
 
+           
+         {/*  <Footer/> */}
     </div>
 
     );

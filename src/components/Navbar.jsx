@@ -40,8 +40,10 @@ const NavContainer = styled.nav`
     }
   }
   padding: .4rem;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.1);
   border: 4px solid rgba(255, 225, 225, 0.5);
+  
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,7 +61,7 @@ const NavContainer = styled.nav`
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    transition: all .6s ease;
+    transition: all .5s ease;
     a{
       color: black;
       font-size: 2rem;
@@ -90,9 +92,8 @@ const NavContainer = styled.nav`
     
     a{
       font-size: 3rem;
-      margin-top: 1rem;
-      color:red;
-      padding:25px;  
+      color:black;
+      padding:20px; 
     }
   }
   .burguer{
@@ -113,13 +114,13 @@ const BgDiv = styled.div`
      width: 100%;
     height: 100%;
     z-index: -1;
-    transition: all .6s ease ;
+    transition: all .5s ease ;
   
   &.active{
     border-radius: 0 0 80% 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 100px;
+    left: 8px;
+    width: 90%;
+    height: 85%;
   }
 `
