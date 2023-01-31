@@ -1,14 +1,13 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../store/slices/isLoading.slice";
 import { Button, Col, Row, Card } from "react-bootstrap";
-// import { cartThunk } from "../store/slices/cart.slice";
 import Carousel from "react-bootstrap/Carousel";
 import { addProduct } from "../store/slices/cartProducts.slice";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom"
+
 import {Cart} from 'react-bootstrap-icons'
 
 const Product = () => {
@@ -16,11 +15,8 @@ const Product = () => {
     const [detail, setDetail] = useState({});
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
-    const navigate = useNavigate();
     const products= useSelector(state=> state.getProducts)
     const [productsByCategory, setProductsByCategory] = useState ([])
-    const [newId, setNewId]= useState(null)
-
 
     useEffect(() => {
         dispatch(setIsLoading(true));
@@ -33,15 +29,12 @@ const Product = () => {
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));
         
-    }, []);
+    }, [id]);
 
     const filterClass = (category) => {
         const productsFiltered = products.filter( (p) => p.category.name == category);
         setProductsByCategory(productsFiltered)  
     }
-    console.log(productsByCategory);
-    console.log(newId);
-    // useEffect(()=> console.log(productsByCategory),[productsByCategory])
     return (
         <Container className="my-5">
         <div>
@@ -213,7 +206,13 @@ const Product = () => {
                                     ${producItem.price}
                                     </Card.Text>
                                     <div className="bu">
-                                    <Button variant="light" onClick={()=> setNewId(producItem.id)}>Details</Button>
+                                    <Button
+                                        variant="light"
+                                        as={Link}
+                                        to={`/product/${producItem.id}`}
+                                    >
+                                        Details
+                                    </Button>
                                     <Button variant="primary"  onClick={() => dispatch(addProduct( producItem ) ) }><Cart/></Button> 
                                     </div>
                                     </Card.Body>
