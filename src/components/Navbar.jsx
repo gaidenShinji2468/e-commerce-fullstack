@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import BurguerButton from './BurguerButton' 
 import Cart from "./Cart"
+import carrito from "/carrito-de-compras.png"
 
 
 function Navbar() {
@@ -24,7 +25,7 @@ function Navbar() {
           <a onClick={handleClick} href="#h">About</a>
           <a onClick={handleClick} href="#h">Contact</a>
           <a onClick={handleClick} href="#h">Blog</a>
-          <button><img src="" alt="" />hola</button> 
+          <button><img src={carrito} alt="" />hola</button> 
           <Cart sendLaunch={ launch => handleLaunch(launch)} launch={launch}/>
         </div>
         <div className='burguer'>
