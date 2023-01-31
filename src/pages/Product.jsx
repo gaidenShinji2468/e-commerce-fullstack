@@ -14,16 +14,27 @@ const Product = () => {
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
     const navigate = useNavigate();
+    const products= useSelector(state=> state.getProducts)
+    const [productsByCategory, setProductsByCategory] = useState ([])
 
     useEffect(() => {
         dispatch(setIsLoading(true));
         axios
             .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}/`)
-            .then((resp) => setDetail(resp?.data?.data?.product))
+            .then((resp) => {
+                setDetail(resp?.data?.data?.product);
+                filterClass(resp?.data?.data?.product.category)
+            })
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));
     }, []);
 
+    const filterClass = (category) => {
+        const productsFiltered = products.filter( (p) => p.category.name == category);
+        setProductsByCategory(productsFiltered)  
+    }
+    console.log(productsByCategory);
+    // useEffect(()=> console.log(productsByCategory),[productsByCategory])
     return (
         <div>
             <Row xs={1} md={2} lg={2}>
