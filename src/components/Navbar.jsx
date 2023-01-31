@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import BurguerButton from './BurguerButton' 
+import Cart from "./Cart"
 
 
 function Navbar() {
-
+  const [ launch ,setLaunch ] = useState(false)
   const [clicked, setClicked] = useState(false)
+  const handleLaunch = l => {
+    setLaunch(l === undefined ? !launch : l)   
+  }
   const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked)
@@ -20,6 +24,8 @@ function Navbar() {
           <a onClick={handleClick} href="#h">About</a>
           <a onClick={handleClick} href="#h">Contact</a>
           <a onClick={handleClick} href="#h">Blog</a>
+          <button><img src="" alt="" />hola</button> 
+          <Cart sendLaunch={ launch => handleLaunch(launch)} launch={launch}/>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
