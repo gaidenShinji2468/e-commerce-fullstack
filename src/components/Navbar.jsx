@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import BurguerButton from './BurguerButton' 
-import Cart from "./Cart"
-import carrito from "/carrito-de-compras.png"
+import Cart_ from "./Cart"
+import {Cart} from "react-bootstrap-icons"
+import Button from "react-bootstrap/Button"
+import {Link} from "react-router-dom"
 
 
 function Navbar() {
@@ -11,22 +13,22 @@ function Navbar() {
   const handleLaunch = launch => {
     setLaunch(launch)   
   }
-  const handleClick = () => {
+const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked)
   }
   return (
     <>
-      <NavContainer>
-        <h2>Navbar <span>Diego!</span></h2>
+      <NavContainer className='primary' >
+        <h2><span>E-</span>comerce</h2>
         <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="#h">Home</a>
-          <a onClick={handleClick} href="#h">Shop</a>
-          <a onClick={handleClick} href="#h">About</a>
-          <a onClick={handleClick} href="#h">Contact</a>
-          <a onClick={handleClick} href="#h">Blog</a>
-          <button onClick={ () => setLaunch(!launch)   } ><img src={carrito} alt="" />hola</button> 
-          <Cart sendLaunch={ launch => handleLaunch(launch)} launch={launch}/>
+          <Link to="/">Products</Link>
+          <Link to="/purchases">Purchases</Link>
+          <Link to="/login">Login</Link>
+          <Button variant='primary' 
+          onClick={() => setLaunch(!launch)}> <Cart/> </Button> 
+           
+          <Cart_ sendLaunch={ launch => handleLaunch(launch)} launch={launch}/>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
@@ -39,6 +41,7 @@ function Navbar() {
 
 export default Navbar
 const NavContainer = styled.nav`
+
   h2{
     color:black;
     font-weight: 400;
@@ -46,11 +49,10 @@ const NavContainer = styled.nav`
       font-weight: bold;
     }
   }
-  padding: .4rem;
+  padding: .8rem;
+  margin: .8rem;
   background: rgba(255,255,255,0.1);
-  border: 4px solid rgba(255, 225, 225, 0.5);
-  
-  -webkit-backdrop-filter: blur(5px);
+  border: 4px solid #137ea7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,6 +60,7 @@ const NavContainer = styled.nav`
     color:black;
     text-decoration: none;
     margin-right: 1rem;
+   
   }
 
   .links{
@@ -70,9 +73,11 @@ const NavContainer = styled.nav`
     text-align: center;
     transition: all .5s ease;
     a{
-      color: black;
+      color:black;
       font-size: 2rem;
       display: block;
+     
+     
     }
     @media(min-width: 768px){
       position: initial;
@@ -82,6 +87,7 @@ const NavContainer = styled.nav`
         color: black;
         display: inline;
         font-weight:sans-serif;
+        z-index: 1;
       }
       display: block;
     }
@@ -92,7 +98,7 @@ const NavContainer = styled.nav`
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top: 30%;
+    top: 15%;
     left: 0;
     right: 0;
     text-align: center;
@@ -101,6 +107,8 @@ const NavContainer = styled.nav`
       font-size: 3rem;
       color:black;
       padding:20px; 
+      z-index:4;
+      position: relative;
     }
   }
   .burguer{
@@ -120,13 +128,13 @@ const BgDiv = styled.div`
     left: -1000px;
      width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 3;
     transition: all .5s ease ;
   
   &.active{
     border-radius: 0 0 80% 0;
     top: 100px;
-    left: 8px;
+    left: 13px;
     width: 90%;
     height: 85%;
   }
