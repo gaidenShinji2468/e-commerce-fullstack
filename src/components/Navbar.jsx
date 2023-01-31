@@ -8,8 +8,8 @@ import carrito from "/carrito-de-compras.png"
 function Navbar() {
   const [ launch ,setLaunch ] = useState(false)
   const [clicked, setClicked] = useState(false)
-  const handleLaunch = l => {
-    setLaunch(l === undefined ? !launch : l)   
+  const handleLaunch = launch => {
+    setLaunch(launch)   
   }
   const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
@@ -25,7 +25,7 @@ function Navbar() {
           <a onClick={handleClick} href="#h">About</a>
           <a onClick={handleClick} href="#h">Contact</a>
           <a onClick={handleClick} href="#h">Blog</a>
-          <button><img src={carrito} alt="" />hola</button> 
+          <button onClick={ () => setLaunch(!launch)   } ><img src={carrito} alt="" />hola</button> 
           <Cart sendLaunch={ launch => handleLaunch(launch)} launch={launch}/>
         </div>
         <div className='burguer'>
