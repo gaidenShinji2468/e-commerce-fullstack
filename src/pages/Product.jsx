@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../store/slices/isLoading.slice";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Card } from "react-bootstrap";
 // import { cartThunk } from "../store/slices/cart.slice";
 import Carousel from "react-bootstrap/Carousel";
 import { addProduct } from "../store/slices/cartProducts.slice";
+import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom"
+import {Cart} from 'react-bootstrap-icons'
 
 const Product = () => {
     const { id } = useParams();
@@ -16,6 +19,8 @@ const Product = () => {
     const navigate = useNavigate();
     const products= useSelector(state=> state.getProducts)
     const [productsByCategory, setProductsByCategory] = useState ([])
+    const [newId, setNewId]= useState(null)
+
 
     useEffect(() => {
         dispatch(setIsLoading(true));
@@ -27,6 +32,7 @@ const Product = () => {
             })
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));
+        
     }, []);
 
     const filterClass = (category) => {
@@ -34,8 +40,10 @@ const Product = () => {
         setProductsByCategory(productsFiltered)  
     }
     console.log(productsByCategory);
+    console.log(newId);
     // useEffect(()=> console.log(productsByCategory),[productsByCategory])
     return (
+        <Container className="my-5">
         <div>
             <Row xs={1} md={2} lg={2}>
                 <Col lg={6}>
@@ -162,14 +170,59 @@ const Product = () => {
                         </Button>
                     </div>
                 </Col>
-
-                <Col lg="12">
-                    <hr />
-                    <br />
-                    <h3>Related products</h3>
-                </Col>
+            </Row>
+                
+            <hr />
+            <br />
+            <h3>Related products</h3>
+            <br />
+            <Row xs={1} md={2} lg={3}>             
+                    {
+                        productsByCategory?.map(producItem => (
+                            <Col key={producItem.id}>
+                                <Card style={{margin:'1rem'}}>
+                                <Carousel interval='15000' >
+                                    <Carousel.Item className="cards">
+                                        <img
+                                        className="d-block w-100"
+                                        src={producItem.productImgs[0]}
+                                        style={{height:200, width:200, objectFit:'cover'}}
+                                        alt="First slide"
+                                        />
+                                    </Carousel.Item>
+                                    <Carousel.Item className="cards">
+                                        <img
+                                        className="d-block w-100"
+                                        src={producItem.productImgs[1]}
+                                        style={{height:200, objectFit:'cover'}}
+                                        alt="Second slide"
+                                        />
+                                    </Carousel.Item>
+                                    <Carousel.Item className="cards w-100" >
+                                        <img
+                                        className="d-block w-100"
+                                        src={producItem.productImgs[2]}
+                                        style={{height:200, objectFit:'cover'}}
+                                        alt="Third slide"
+                                        />
+                                    </Carousel.Item>
+                                </Carousel>
+                                <Card.Body className="card__body">
+                                    <Card.Title>{producItem.title}</Card.Title>
+                                    <Card.Text>
+                                    ${producItem.price}
+                                    </Card.Text>
+                                    <div className="bu">
+                                    <Button variant="light" onClick={()=> setNewId(producItem.id)}>Details</Button>
+                                    <Button variant="primary"  onClick={() => dispatch(addProduct( producItem ) ) }><Cart/></Button> 
+                                    </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                    ) ) }
             </Row>
         </div>
+        </Container>
     );
 };
 export default Product;

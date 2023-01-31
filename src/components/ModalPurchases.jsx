@@ -2,7 +2,9 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
 
-const ModalPurchases = ({ show, handleClose }) => {
+const ModalPurchases = ({ show, handleClose, data }) => {
+
+    console.log(data);
     return (
         <div>
             <Modal show={show} onHide={handleClose}>
@@ -30,10 +32,10 @@ const ModalPurchases = ({ show, handleClose }) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Samsung Galaxy S22</td>
-                                <td>1399.00</td>
+                                <td>{data.title}</td>
+                                <td>{data.price}</td>
                                 <td>1</td>
-                                <td>1399.00</td>
+                                <td>{data.price}</td>
                             </tr>
                         </tbody>
                     </Table>

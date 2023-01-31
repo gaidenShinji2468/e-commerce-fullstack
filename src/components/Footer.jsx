@@ -44,12 +44,12 @@ const Footer = () => {
                             </div>
                             <div className="footer-col">
                                 <h4>follow us</h4>
-                                <div className="social-links">
+                                {/* <div className="social-links">
                                     <a href="#"><i class=""></i></a>
                                     <a href="#"><i class=""></i></a>
                                     <a href="#"><i class=""></i></a>
                                     <a href="#"><i class=""></i></a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
