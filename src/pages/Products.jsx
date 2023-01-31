@@ -7,67 +7,74 @@ import { Link } from "react-router-dom"
 import {Cart} from 'react-bootstrap-icons'
 import {addProduct} from '/src/store/slices/cartProducts.slice'
 import axios from "axios"
+import '../assets/styles/Poducts.css'
+
 
 
 const Products= () => {
   const dispatch = useDispatch()
   const product = useSelector( state => state.getProducts )
   const [categorie, setCategories] = useState([])
-  const [detail, setDetail] = useState({});
+  // const [detail, setDetail] = useState({})
+const [productsByCategory, setProductsByCategory] = useState ([]) 
 
   useEffect(() => {
-    dispatch( getProductsThunk() )
-    
 
+    dispatch( getProductsThunk() )
     axios
     .get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
     .then( resp =>  setCategories(resp?.data?.data?.categories))
     .catch(error => console.error(error))
-    // .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}/`)
-    // .then(
-    //     (resp) => {console.log(resp); setDetail(resp?.data?.data?.product)}
         
-    // )
   }, [] )
- 
+useEffect( () => {
+  setProductsByCategory(product)
+
+},[product])
+
+  const filterClas = (e) => {
+   const name = e.target.name;
+   const productsFiltered = product.filter( (p) => p.category.name == name);
+   setProductsByCategory(productsFiltered)  
+
+  }
+  
   return (
     <div>
-        <h1>Products</h1>
-        {categorie.map((category) => (
-        <Button
+        <h1 className="titel">Products</h1>
+       <div className="Botonera">{categorie.map((category) => (
+        <Button 
           key={category.id}
           variant="primary"
-          // onClick={}
+          onClick={filterClas}
+          name={category.name}
         >
           {category.name}
         </Button>
       ))}
-      <Button variant="dark" onClick={() => dispatch(getProductsThunk())}>
+      <Button variant="light" onClick={() => dispatch(getProductsThunk())}>
         Ver todos
-      </Button>
+      </Button></div> 
       
-        <Row xs={1} md={2} xl={3}>
+        <Row xs={1} md={2} xl={4}>
           {
-            product?.map(producItem => (
+           productsByCategory?.map(producItem => (
           
           <Col key={producItem.id}>
-            <Card>
+            <Card className="container__cards">
               {/* inicio de carousel */}
               {/* <p>{producItem.id}</p> */}
-              <Carousel>
-                  <Carousel.Item>
+              <Carousel interval='15000'>
+                  <Carousel.Item className="cards">
                     <img
                       className="d-block w-100"
                       src={producItem.productImgs[0]}
-                      style={{height:200, objectFit:'cover'}}
+                      style={{height:200, width:200, objectFit:'cover'}}
                       alt="First slide"
                     />
-                    {/* <Carousel.Caption>
-                      <h3>First slide label</h3>
-                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption> */}
+                    
                   </Carousel.Item>
-                  <Carousel.Item>
+                  <Carousel.Item className="cards">
                     <img
                       className="d-block w-100"
                       src={producItem.productImgs[1]}
@@ -75,12 +82,9 @@ const Products= () => {
                       alt="Second slide"
                     />
 
-                    {/* <Carousel.Caption>
-                      <h3>Second slide label</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption> */}
+                    
                   </Carousel.Item>
-                  <Carousel.Item>
+                  <Carousel.Item className="cards w-100" >
                     <img
                       className="d-block w-100"
                       src={producItem.productImgs[2]}
@@ -88,27 +92,20 @@ const Products= () => {
                       alt="Third slide"
                     />
 
-                    {/* <Carousel.Caption>
-                      <h3>Third slide label</h3>
-                      <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                      </p>
-                    </Carousel.Caption> */}
+                    
                   </Carousel.Item>
-    </Carousel>
-              {/* fin carousel */}
-              {/* <Card.Img
-              variant="top" 
-              src={producItem.productImgs[0]}
-              style={{height:200, objectFit:'cover'}}
-               /> */}
-              <Card.Body>
+              </Carousel>
+              
+              <Card.Body className="card__body">
                   <Card.Title>{producItem.title}</Card.Title>
                   <Card.Text>
-                   price {producItem.price}
+                   ${producItem.price}
                   </Card.Text>
-                  <Button variant="primary" style={{marginLeft:50}} onClick={() => dispatch(addProduct( producItem ) ) }><Cart/></Button>
-                  <Button variant="primary" style={{marginLeft:200}} as={ Link } to={`/product/${producItem.id}`}>Details</Button>
+                  <div className="bu">
+                  <Button variant="light"  as={ Link } to={`/product/${producItem.id}`}>Details</Button>
+                  <Button variant="primary"  onClick={() => dispatch(addProduct( producItem ) ) }><Cart/></Button> 
+                  </div>
+                                   
                   {/* crear condiconal para entrar al carrito */}
                 </Card.Body>
               </Card>
