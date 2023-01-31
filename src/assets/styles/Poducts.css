@@ -1,0 +1,54 @@
+body{
+    background-color: rgba(213, 217, 218, 0.1);
+}
+
+.cards img{
+    padding: 5px;
+}
+.container__cards{
+    margin: 15px 25px;
+    width: 400px;
+
+}
+.titel{
+    text-align: center;
+    font-size: 4em;
+}
+.card__body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+
+    
+
+}
+.bu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 0 20px;
+    /* width: 100%; */
+
+}
+.bu button{
+    width: 83.91px;
+}
+.Botonera{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px 0;
+    /* background-color: rgba(213, 217, 218, 0.1); */
+    height: 60px;
+    
+
+}
