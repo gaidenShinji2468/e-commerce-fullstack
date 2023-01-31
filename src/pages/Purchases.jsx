@@ -2,11 +2,13 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import ModalPurchases from "../components/ModalPurchases";
+// import { useSelector } from "react-redux";
 
 const Purchases = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    // const productsCart= useSelector(state => state.cartProducts)
     return (
         <div>
             <h2>My purchases</h2>

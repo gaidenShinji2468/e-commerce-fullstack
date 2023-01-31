@@ -1,62 +1,86 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../store/slices/isLoading.slice";
 import { Button, Col, Row } from "react-bootstrap";
-// import { filterCategoryThunk } from "../store/slices/products.slice";
+// import { cartThunk } from "../store/slices/cart.slice";
 import Carousel from "react-bootstrap/Carousel";
+import { addProduct } from "../store/slices/cartProducts.slice";
+
 const Product = () => {
     const { id } = useParams();
     const [detail, setDetail] = useState({});
     const dispatch = useDispatch();
-    // const producDetail = useSelector((state) => state.cartProducts);
+    const [count, setCount] = useState(1);
+    const navigate = useNavigate();
+
     useEffect(() => {
         dispatch(setIsLoading(true));
-
         axios
             .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}/`)
-            .then(
-                (resp) => {
-                    console.log(resp);
-                    setDetail(resp?.data?.data?.product);
-                }
-                // dispatch(
-                //     filterCategoryThunk(resp?.data?.data?.product?.category)
-                // )
-            )
+            .then((resp) => setDetail(resp?.data?.data?.product))
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));
     }, []);
-    // console.log(detail);
-    // console.log(data.data.product);
+
     return (
         <div>
             <Row xs={1} md={2} lg={2}>
                 <Col lg={6}>
                     <div className="carousel">
-                        <Carousel fade variant="dark">
-                            <Carousel.Item style={{ padding: "4rem" }}>
+                        <Carousel fade variant="dark" interval='15000'>
+                            <Carousel.Item
+                                style={{
+                                    padding: "3rem 4rem",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    width: "100% ",
+                                }}
+                            >
                                 <img
-                                    className="d-block w-100 "
+                                    style={{
+                                        height: "400px",
+                                        objectFit: "contain",
+                                    }}
+                                    // className="carousel_img"
                                     src={detail?.productImgs?.[0]}
                                     alt="First slide"
                                 />
-                                {/* <Carousel.Caption>
-                                <h3>First slide label</h3>
-                            </Carousel.Caption> */}
                             </Carousel.Item>
 
-                            <Carousel.Item style={{ padding: "4rem" }}>
+                            <Carousel.Item
+                                style={{
+                                    padding: "3rem 4rem",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    width: "100% ",
+                                }}
+                            >
                                 <img
-                                    className="d-block w-100"
+                                    style={{
+                                        height: "400px",
+                                        objectFit: "contain",
+                                    }}
+                                    // className="carousel_img"
                                     src={detail?.productImgs?.[1]}
                                     alt="Second slide"
                                 />
                             </Carousel.Item>
-                            <Carousel.Item style={{ padding: "4rem" }}>
+                            <Carousel.Item
+                                style={{
+                                    padding: "3rem 4rem",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    width: "100% ",
+                                }}
+                            >
                                 <img
-                                    className="d-block w-100"
+                                    style={{
+                                        height: "400px",
+                                        objectFit: "contain",
+                                    }}
+                                    // className="carousel_img"
                                     src={detail?.productImgs?.[2]}
                                     alt="Third slide"
                                 />
@@ -91,7 +115,16 @@ const Product = () => {
                         <div>
                             <h5>Quantity</h5>
                             <div style={{ display: "flex" }}>
-                                <Button variant="secondary">-</Button>
+                                <Button
+                                    onClick={() =>
+                                        count === 1
+                                            ? setCount(count)
+                                            : setCount(count - 1)
+                                    }
+                                    variant="secondary"
+                                >
+                                    -
+                                </Button>
                                 <div
                                     style={{
                                         width: "30px",
@@ -101,14 +134,21 @@ const Product = () => {
                                         alignItems: "center",
                                     }}
                                 >
-                                    3
+                                    {count}
                                 </div>
-                                <Button variant="secondary">+</Button>
+                                <Button
+                                    onClick={() => setCount(count + 1)}
+                                    variant="secondary"
+                                >
+                                    +
+                                </Button>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <Button>add to cart</Button>
+                        <Button onClick={() =>{console.log(detail); dispatch(addProduct( detail ) )}}>
+                            add to cart
+                        </Button>
                     </div>
                 </Col>
 
