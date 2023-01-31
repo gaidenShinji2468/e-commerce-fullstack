@@ -11,10 +11,10 @@ const Footer = () => {
   return (
     <>
         <FooterContainer>
-                <footer class="footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="footer-col">
+                <footer className="footer">
+                    <div className="container">
+                        <div className="row">
+                            <div className="footer-col">
                                 <h4>company</h4>
                                 <ul>
                                     <li><a href="#">about us</a></li>
@@ -23,7 +23,7 @@ const Footer = () => {
                                     <li><a href="#">affiliate program</a></li>
                                 </ul>
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4>get help</h4>
                                 <ul>
                                     <li><a href="#">FAQ</a></li>
@@ -33,7 +33,7 @@ const Footer = () => {
                                     <li><a href="#">payment options</a></li>
                                 </ul>
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4>online shop</h4>
                                 <ul>
                                     <li><a href="#">watch</a></li>
@@ -42,9 +42,9 @@ const Footer = () => {
                                     <li><a href="#">dress</a></li>
                                 </ul>
                             </div>
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4>follow us</h4>
-                                <div class="social-links">
+                                <div className="social-links">
                                     <a href="#"><i class=""></i></a>
                                     <a href="#"><i class=""></i></a>
                                     <a href="#"><i class=""></i></a>
@@ -62,11 +62,7 @@ const Footer = () => {
 export default Footer
 
 const FooterContainer = styled.div`
-*{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
+
 .container{
 	max-width: 1170px;
 	margin:auto;
@@ -80,10 +76,11 @@ ul{
 }
 .footer{
 	background: rgba(255,255,255,0.1);
-    border: 4px solid rgba(255, 225, 225, 0.5);
+    border: 4px solid #137ea7;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px); 
-    padding: 30px 0;  
+    padding: .8rem;
+    margin: .8rem; 
 }
 .footer-col{
    width: 22%;
@@ -102,7 +99,7 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
-	background-color: #e91e63;
+	background-color: #137ea7;
 	height: 3px;
 	box-sizing: border-box;
 	width: 70px;
