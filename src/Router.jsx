@@ -9,12 +9,15 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Purchases from "./pages/Purchases";
 import Navbar from "./components/Navbar";
+import Footer from "./components/footer"
 
 function Router()
 {
     const isLoading = useSelector(state => state.isLoading);   
  
     return (
+        
+     
         <BrowserRouter>
 	    <Navbar/>
 	    {isLoading && <Loader/>}
@@ -27,11 +30,12 @@ function Router()
                     path="/product/:id"
 	            element={<Product/>}
 	        />
-	    <Route
+	    <Route 
                     path="/purchases"
 	            element={<Purchases/>}
 	        />
 	    </Routes>
+		<Footer/>
 	</BrowserRouter>
     );
 }
