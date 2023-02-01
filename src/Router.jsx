@@ -9,7 +9,9 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Purchases from "./pages/Purchases";
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer"
+import Footer from "./components/Footer";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+import LogIn from "./pages/LogIn";
 
 function Router()
 {
@@ -26,16 +28,22 @@ function Router()
                     path="/"
 	            element={<Products/>}
 	        />
-	    <Route
+	        <Route
                     path="/product/:id"
 	            element={<Product/>}
 	        />
-	    <Route 
-                    path="/purchases"
-	            element={<Purchases/>}
+	        <Route
+                    path="/login"
+	            element={<LogIn/>}
 	        />
+	        <Route element={<ProtectedRoutes/>}>
+	            <Route 
+                        path="/purchases"
+	                element={<Purchases/>}
+	            />
+	        </Route>
 	    </Routes>
-		<Footer/>
+	    <Footer/>
 	</BrowserRouter>
     );
 }

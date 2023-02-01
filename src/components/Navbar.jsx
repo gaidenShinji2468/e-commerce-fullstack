@@ -4,19 +4,29 @@ import BurguerButton from './BurguerButton'
 import Cart_ from "./Cart"
 import {Cart} from "react-bootstrap-icons"
 import Button from "react-bootstrap/Button"
-import {Link} from "react-router-dom"
-
+import {
+    Link,
+    useNavigate
+} from "react-router-dom"
+import LogOut from "/src/pages/LogOut";
+import {
+    useSelector
+} from "react-redux";
 
 function Navbar() {
   const [ launch ,setLaunch ] = useState(false)
   const [clicked, setClicked] = useState(false)
+  const isLogged = useSelector(state => state.isLogged);
+
   const handleLaunch = launch => {
     setLaunch(launch)   
   }
-const handleClick = () => {
+
+  const handleClick = () => {
     //cuando esta true lo pasa a false y vice versa
     setClicked(!clicked)
   }
+
   return (
     <>
       <NavContainer className='primary' >
@@ -24,7 +34,11 @@ const handleClick = () => {
         <div className={`links ${clicked ? 'active' : ''}`}>
           <Link to="/">Products</Link>
           <Link to="/purchases">Purchases</Link>
-          <Link to="/login">Login</Link>
+	  {
+              !isLogged ? 
+		  <Link to="/login">Login</Link> :
+		  <LogOut/>
+	  }
           <Button variant='primary' 
           onClick={() => setLaunch(!launch)}> <Cart/> </Button> 
            

@@ -1,11 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-//import {Footer} from "react-bootstrap-icons";
-
-
-
-
-
 
 const Footer = () => {
   return (
@@ -41,16 +35,7 @@ const Footer = () => {
                                     <li><a href="#">shoes</a></li>
                                     <li><a href="#">dress</a></li>
                                 </ul>
-                            </div>
-                            <div className="footer-col">
-                                <h4>follow us</h4>
-                                {/* <div className="social-links">
-                                    <a href="#"><i class=""></i></a>
-                                    <a href="#"><i class=""></i></a>
-                                    <a href="#"><i class=""></i></a>
-                                    <a href="#"><i class=""></i></a>
-                                </div> */}
-                            </div>
+                            </div> 
                         </div>
                     </div>
             </footer>
