@@ -1,5 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import {Facebook} from "react-bootstrap-icons"
+import {Whatsapp} from "react-bootstrap-icons"
+import {Twitter} from "react-bootstrap-icons"
+import {Instagram} from "react-bootstrap-icons"
+import {Tiktok} from "react-bootstrap-icons"
+import {Youtube} from "react-bootstrap-icons"
 
 const Footer = () => {
   return (
@@ -36,6 +42,17 @@ const Footer = () => {
                                     <li><a href="#">dress</a></li>
                                 </ul>
                             </div> 
+                            <div class="footer-col">
+                                <h4>follow us</h4>
+                                <div class="social-links">
+                                    <a href="#"><i className="hhh"><Facebook/></i></a>
+                                    <a href="#"><i className="hhh"><Whatsapp/></i></a>
+                                    <a href="#"><i className="hhh"><Twitter/></i></a>
+                                    <a href="#"><i className="hhh"><Instagram/></i></a>
+                                    <a href="#"><i className="hhh"><Tiktok/></i></a>
+                                    <a href="#"><i className="hhh"><Youtube/></i></a>  
+                                </div>
+                            </div>
                         </div>
                     </div>
             </footer>
@@ -60,10 +77,9 @@ ul{
 	list-style: none;
 }
 .footer{
-	background: rgba(255,255,255,0.1);
+	background: silver;
     border: 4px solid #137ea7;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); 
+   
     padding: .8rem;
     margin: .8rem; 
 }
@@ -107,12 +123,13 @@ ul{
 	padding-left: 8px;
       
 }
+
 .footer-col .social-links a{
 	display: inline-block;
 	height: 40px;
 	width: 40px;
 	background-color: rgba(255,255,255,0.2);
-	margin:0 10px 10px 0;
+	margin:0 30px 40px 0;
 	text-align: center;
 	line-height: 40px;
 	border-radius: 50%;
@@ -122,6 +139,12 @@ ul{
 .footer-col .social-links a:hover{
 	color: #24262b;
 	background-color: #ffffff;
+}
+.hhh{
+	font-size:25px;
+    display:flex;
+    justify-content:center;
+    padding-top: 8px;
 }
 
 /*responsive*/

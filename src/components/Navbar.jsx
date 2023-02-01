@@ -4,6 +4,9 @@ import BurguerButton from './BurguerButton'
 import Cart_ from "./Cart"
 import {Cart} from "react-bootstrap-icons"
 import Button from "react-bootstrap/Button"
+import samsung from "/samsung.png"
+
+
 import {
     Link,
     useNavigate
@@ -29,8 +32,11 @@ function Navbar() {
 
   return (
     <>
-      <NavContainer className='primary' >
-        <h2><span>E-</span>comerce</h2>
+      <NavContainer>
+        <Link to="/"><h2><span>E-</span>comerce</h2></Link>
+        
+          <img className='I-S-A' src={samsung} alt="" />
+       
         <div className={`links ${clicked ? 'active' : ''}`}>
           <Link to="/">Products</Link>
           <Link to="/purchases">Purchases</Link>
@@ -61,11 +67,16 @@ const NavContainer = styled.nav`
     font-weight: 400;
     span{
       font-weight: bold;
+      color:#137ea7;
     }
   }
+.I-S-A{
+  width: 18%;
+}
+
   padding: .8rem;
   margin: .8rem;
-  background: rgba(255,255,255,0.1);
+  background: silver;
   border: 4px solid #137ea7;
   display: flex;
   align-items: center;
@@ -134,7 +145,7 @@ const NavContainer = styled.nav`
 
 const BgDiv = styled.div`
     background: rgba(255,255,255,0.1);
-    border: 4px solid rgba(255, 225, 225, 0.5);
+    border: 4px solid #137ea7;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px); 
     position: absolute;
@@ -147,7 +158,7 @@ const BgDiv = styled.div`
   
   &.active{
     border-radius: 0 0 80% 0;
-    top: 100px;
+    top: 110px;
     left: 13px;
     width: 90%;
     height: 85%;
