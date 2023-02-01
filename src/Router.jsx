@@ -9,12 +9,17 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Purchases from "./pages/Purchases";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+import LogIn from "./pages/LogIn";
 
 function Router()
 {
     const isLoading = useSelector(state => state.isLoading);   
  
     return (
+        
+     
         <BrowserRouter>
 	    <Navbar/>
 	    {isLoading && <Loader/>}
@@ -23,15 +28,22 @@ function Router()
                     path="/"
 	            element={<Products/>}
 	        />
-	    <Route
+	        <Route
                     path="/product/:id"
 	            element={<Product/>}
 	        />
-	    <Route
-                    path="/purchases"
-	            element={<Purchases/>}
+	        <Route
+                    path="/login"
+	            element={<LogIn/>}
 	        />
+	        <Route element={<ProtectedRoutes/>}>
+	            <Route 
+                        path="/purchases"
+	                element={<Purchases/>}
+	            />
+	        </Route>
 	    </Routes>
+	    <Footer/>
 	</BrowserRouter>
     );
 }

@@ -4,13 +4,15 @@ import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AlertError from "../components/AlertError";
+import {useDispatch} from "react-redux";
+import {setIsLogged} from "/src/store/slices/isLogged.slice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
       .post("https://e-commerce-api-v2.academlo.tech/api/v1/users/login", data)
       .then((resp) => {
         localStorage.setItem("token", resp.data?.data);
+	dispatch(setIsLogged());
         navigate("/");
       })
       .catch((error) => {
@@ -61,8 +64,6 @@ const Login = () => {
           </Button>
         </Form>
       </Card>
-
-      <AlertError isVisible={alert} dismiss={() => setAlert(false)} />
     </>
   );
 };
