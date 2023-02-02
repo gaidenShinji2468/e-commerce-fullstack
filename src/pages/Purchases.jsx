@@ -1,9 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalPurchases from "../components/ModalPurchases";
-import { useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserPurchasesThunk} from "/src/store/slices/userPurchases.slice";
 
 const Purchases = () => {
     const [show, setShow] = useState(false);
@@ -12,18 +13,24 @@ const Purchases = () => {
         setShow(true)
         setDataSelected(info)
     }
-    const productsCart= useSelector(state => state.cartProducts)
-    console.log(productsCart);
-    const [dataSelected, setDataSelected] = useState({})
+
+    const [dataSelected, setDataSelected] = useState({});
+    const userPurchases = useSelector(state => state.userPurchases);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUserPurchasesThunk());
+    }, []);
+
     return (
-        <Container className="my-5">
+        <Container className="my-4">
         <div>
             <h2>My purchases</h2>
             <hr />
-            {
-                productsCart?.map(item =>(
+            {userPurchases.map((purchase) =>
+                purchase.cart?.products?.map((item) => (
                     <Card key={item.id} style={{margin:'1rem'}}>
-                        <Card.Header>purchase</Card.Header>
+                        <Card.Header>{item.productsInCart?.createdAt.slice(0,10)}</Card.Header>
                         <Card.Body
                             style={{ display: "flex", justifyContent: "space-around" }}
                         >
@@ -38,16 +45,16 @@ const Purchases = () => {
                                     alignItems: "center",
                                 }}
                             >
-                                1
+                                {item.productsInCart.quantity}
                             </Card.Text>
                             <Card.Text>{item.price}</Card.Text>
-                            <Button variant="primary" onClick={() => handleShow(item)}>
+                            <Button variant="primary" onClick={()=>handleShow(item)}>
                                 see details
                             </Button>
                         </Card.Body>
                     </Card>
                 ))
-            }
+            )}
             <ModalPurchases 
             show={show} 
             handleClose={handleClose} 
