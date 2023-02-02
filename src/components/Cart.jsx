@@ -41,7 +41,7 @@ function Cart({
 
     useEffect(() => {
 	prepareProducts();
-        setTotal(cartProducts.reduce((accum, currentValue) => accum + Number(currentValue.price), 0));
+        setTotal(cartProducts.reduce((accum, currentValue) => accum + (Number(currentValue.price)*currentValue.productsInCart.quantity), 0));
     }, [cartProducts]);
 
     const dropProduct = id => {
