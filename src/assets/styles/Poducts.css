@@ -50,5 +50,73 @@ body{
     /* background-color: rgba(213, 217, 218, 0.1); */
     height: 60px;
     
+}
+.conteiner__pro{
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-start;
+}
+.filter{
+    width: 12%;
+    height: 550px;
+    /* background-color: red; */
+    margin: 2em;
+    /* border: 2px solid black; */
+    text-align: center; 
+}
+.filter label{
 
+margin-top: 5em;
+
+
+}
+.butt{
+    /* background-color: aqua; */
+    margin: 0 0 1em 0;
+    text-align: center;
+}
+@media (max-width: 500px){
+    *{
+     
+     box-sizing: border-box;
+     max-width: 330px;
+    } 
+    .Botonera{
+        
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 2em 2em;
+        height: 90px;
+        width: 100%;
+        
+    }
+    .filter{
+        width: 100%;
+        height: 350px;
+        
+        margin: 0 1em;
+        padding: 0;
+        
+    }
+    .filter label{
+    
+    margin-top: 1em;
+    
+    
+    }
+    .butt{
+       
+        margin: 0 0 1em 0;
+        text-align: center;
+    }
+    .conteiner__pro{
+    
+        display: inline-block;
+        width: 100%;
+        
+    }
 }

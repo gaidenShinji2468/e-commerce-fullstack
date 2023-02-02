@@ -77,10 +77,13 @@ useEffect( () => {
       <Button variant="light" onClick={() => dispatch(getProductsThunk())}>
         Ver todos
       </Button></div> 
-        <FormGroup>
+      <div  className="conteiner__pro">
+      <div className='filter'>
+        <FormGroup >
 	    <Form.Label htmlFor="name">Filter by Name</Form.Label><Form.Control
 	        id="name"
 	        type="text"
+          className="butt"
 	        value={input}
                 onChange={event => setInput(event.target.value.toLowerCase())}
 	    />
@@ -90,6 +93,7 @@ useEffect( () => {
 	    <Form.Label htmlFor="min">Filter by Price</Form.Label><Form.Control
 	        id="min"
 	        type="number"
+          className="butt"
 	        value={range.min}
                 onChange={event => setRange({
 		    ...range,
@@ -99,6 +103,7 @@ useEffect( () => {
 	    <Form.Control
 	        id="max"
 	        type="number"
+          className="butt"
 	        value={range.max}
                 onChange={event => setRange({
 		    ...range,
@@ -107,6 +112,8 @@ useEffect( () => {
 	    />
 	    <Button variant="primary" onClick={filterByPrice}>Search</Button>
 	</FormGroup>
+  </div>
+  <div className="Products">
         <Row xs={1} md={2} xl={3}>
           {
            productsFiltered?.map(producItem => (
@@ -162,7 +169,8 @@ useEffect( () => {
           </Col>
           ) ) }
         </Row>
-
+        </div>
+        </div>
     </div>
   )
 }
