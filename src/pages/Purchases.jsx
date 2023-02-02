@@ -9,13 +9,11 @@ import {getUserPurchasesThunk} from "/src/store/slices/userPurchases.slice";
 const Purchases = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    
     const handleShow = (info) => {
         setShow(true)
         setDataSelected(info)
     }
 
-    const [userProducts, setUserProducts] = useState([]);
     const [dataSelected, setDataSelected] = useState({});
     const userPurchases = useSelector(state => state.userPurchases);
     const dispatch = useDispatch();
@@ -24,17 +22,15 @@ const Purchases = () => {
         dispatch(getUserPurchasesThunk());
     }, []);
 
-    useEffect(() => console.log(userPurchases), [userPurchases])//DEBUG
-
     return (
-        <Container className="my-5">
+        <Container className="my-4">
         <div>
             <h2>My purchases</h2>
             <hr />
-            {
-                /*userPurchases.map((item, index) =>(
+            {userPurchases.map((purchase) =>
+                purchase.cart?.products?.map((item) => (
                     <Card key={item.id} style={{margin:'1rem'}}>
-                        <Card.Header>purchase</Card.Header>
+                        <Card.Header>{item.productsInCart?.createdAt.slice(0,10)}</Card.Header>
                         <Card.Body
                             style={{ display: "flex", justifyContent: "space-around" }}
                         >
@@ -49,16 +45,16 @@ const Purchases = () => {
                                     alignItems: "center",
                                 }}
                             >
-                                1
+                                {item.productsInCart.quantity}
                             </Card.Text>
                             <Card.Text>{item.price}</Card.Text>
-                            <Button variant="primary" onClick={() => handleShow(item)}>
+                            <Button variant="primary" onClick={()=>handleShow(item)}>
                                 see details
                             </Button>
                         </Card.Body>
                     </Card>
-                ))*/
-            }
+                ))
+            )}
             <ModalPurchases 
             show={show} 
             handleClose={handleClose} 
