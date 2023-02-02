@@ -15,7 +15,7 @@ const ModalPurchases = ({ show, handleClose, data }) => {
                 >
                     <Modal.Title>Electronic bill</Modal.Title>
                     <Modal.Body>
-                        <p>friend shop c.a </p> J‑29989842‑2
+                        <p>friend shop c.a<br />J‑29989842‑2 <br />{data.productsInCart?.createdAt.slice(0,10)}</p> 
                     </Modal.Body>
                 </Modal.Header>
                 <Modal.Body>
@@ -32,8 +32,8 @@ const ModalPurchases = ({ show, handleClose, data }) => {
                             <tr>
                                 <td>{data.title}</td>
                                 <td>{data.price}</td>
-                                <td>1</td>
-                                <td>{data.price}</td>
+                                <td>{data.productsInCart?.quantity}</td>
+                            <td>{data.price * data.productsInCart?.quantity}.00</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -47,7 +47,7 @@ const ModalPurchases = ({ show, handleClose, data }) => {
                     <p>
                         <strong>total paid</strong>
                     </p>
-                    <p>1399.00</p>
+                    <p>{data.price * data.productsInCart?.quantity}.00</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

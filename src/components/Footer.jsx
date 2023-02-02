@@ -42,9 +42,9 @@ const Footer = () => {
                                     <li><a href="#">dress</a></li>
                                 </ul>
                             </div> 
-                            <div class="footer-col">
+                            <div className="footer-col">
                                 <h4>follow us</h4>
-                                <div class="social-links">
+                                <div className="social-links">
                                     <a href="#"><i className="hhh"><Facebook/></i></a>
                                     <a href="#"><i className="hhh"><Whatsapp/></i></a>
                                     <a href="#"><i className="hhh"><Twitter/></i></a>
