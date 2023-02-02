@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setIsLogged} from "/src/store/slices/isLogged.slice";
+import {setIsLoading} from "/src/store/slices/isLoading.slice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
+    dispatch(setIsLoading(true));
     e.preventDefault();
 
     const data = {
@@ -23,16 +25,17 @@ const Login = () => {
     };
 
     axios
-      .post("https://e-commerce-api-v2.academlo.tech/api/v1/users/login", data)
+      .post("https://e-commerce-api.academlo.tech/api/v1/users/login", data)
       .then((resp) => {
-        localStorage.setItem("token", resp.data?.data);
+        localStorage.setItem("token", resp.data.data.token);
 	dispatch(setIsLogged());
         navigate("/");
       })
       .catch((error) => {
         console.error(error);
         setAlert(true);
-      });
+      })
+      .finally(() => dispatch(setIsLoading(false)));
   };
 
   return (

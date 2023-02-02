@@ -3,8 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
 
 const ModalPurchases = ({ show, handleClose, data }) => {
-
-    console.log(data);
     return (
         <div>
             <Modal show={show} onHide={handleClose}>

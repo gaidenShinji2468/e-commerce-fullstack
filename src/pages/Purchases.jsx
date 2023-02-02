@@ -1,27 +1,38 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalPurchases from "../components/ModalPurchases";
-import { useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserPurchasesThunk} from "/src/store/slices/userPurchases.slice";
 
 const Purchases = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
+    
     const handleShow = (info) => {
         setShow(true)
         setDataSelected(info)
     }
-    const productsCart= useSelector(state => state.cartProducts)
-    console.log(productsCart);
-    const [dataSelected, setDataSelected] = useState({})
+
+    const [userProducts, setUserProducts] = useState([]);
+    const [dataSelected, setDataSelected] = useState({});
+    const userPurchases = useSelector(state => state.userPurchases);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUserPurchasesThunk());
+    }, []);
+
+    useEffect(() => console.log(userPurchases), [userPurchases])//DEBUG
+
     return (
         <Container className="my-5">
         <div>
             <h2>My purchases</h2>
             <hr />
             {
-                productsCart?.map(item =>(
+                /*userPurchases.map((item, index) =>(
                     <Card key={item.id} style={{margin:'1rem'}}>
                         <Card.Header>purchase</Card.Header>
                         <Card.Body
@@ -46,7 +57,7 @@ const Purchases = () => {
                             </Button>
                         </Card.Body>
                     </Card>
-                ))
+                ))*/
             }
             <ModalPurchases 
             show={show} 
