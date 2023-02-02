@@ -49,7 +49,7 @@ useEffect( () => {
 
     const filterByPrice = () => {
         const productsFiltered = product.filter(prdt => {
-            if(prdt.price >= Number(range.min) && prdt.price <= Number(range.max))
+            if((!range.min || prdt.price >= Number(range.min)) && (prdt.price <= Number(range.max) || !range.max))
 		return true;
 	    return false;
 	});
