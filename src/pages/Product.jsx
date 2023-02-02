@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../store/slices/isLoading.slice";
 import { Button, Col, Row, Card } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
-import { addProduct } from "../store/slices/cartProducts.slice";
+import { addCartProductThunk } from "../store/slices/cartProducts.slice";
 import Container from "react-bootstrap/Container";
 
 import {Cart} from 'react-bootstrap-icons'
@@ -35,6 +35,11 @@ const Product = () => {
         const productsFiltered = products.filter( (p) => p.category.name == category);
         setProductsByCategory(productsFiltered)  
     }
+    
+    const handleAddCart = product => {
+        dispatch(addCartProductThunk(product, count));
+    }
+
     return (
         <Container className="my-5">
         <div>
@@ -158,7 +163,7 @@ const Product = () => {
                         </div>
                     </div>
                     <div>
-                        <Button onClick={() =>{console.log(detail); dispatch(addProduct( detail ) )}}>
+                        <Button onClick={() => handleAddCart( detail )}>
                             add to cart
                         </Button>
                     </div>

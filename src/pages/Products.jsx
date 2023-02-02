@@ -5,18 +5,20 @@ import { useEffect, useState } from "react"
 import { Row, Col, Button, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import {Cart} from 'react-bootstrap-icons'
-import {addProduct} from '/src/store/slices/cartProducts.slice'
 import axios from "axios"
 import '../assets/styles/Poducts.css'
-
-
+import getConfig from "/src/utils/getConfig";
+import {addCartProductThunk} from "/src/store/slices/cartProducts.slice";
+import FormGroup from "react-bootstrap/FormGroup";
+import Form from "react-bootstrap/Form";
 
 const Products= () => {
-  const dispatch = useDispatch()
   const product = useSelector( state => state.getProducts )
   const [categorie, setCategories] = useState([])
-  // const [detail, setDetail] = useState({})
-const [productsByCategory, setProductsByCategory] = useState ([]) 
+  const [productsFiltered, setProductsFiltered] = useState ([])
+    const [input, setInput] = useState("");
+    const [range, setRange] = useState({min: 0, max: 0});
+    const dispatch = useDispatch();
 
   useEffect(() => {
 
@@ -28,16 +30,36 @@ const [productsByCategory, setProductsByCategory] = useState ([])
         
   }, [] )
 useEffect( () => {
-  setProductsByCategory(product)
+  setProductsFiltered(product)
 
 },[product])
 
-  const filterClas = (e) => {
+  const filterByCategory = (e) => {
    const name = e.target.name;
    const productsFiltered = product.filter( (p) => p.category.name == name);
-   setProductsByCategory(productsFiltered)  
+   setProductsFiltered(productsFiltered)  
 
   }
+
+    const filterByName = () => {
+        const productsFiltered = product.filter(prdt => prdt.title.toLowerCase().includes(input));
+
+	setProductsFiltered(productsFiltered);
+    }
+
+    const filterByPrice = () => {
+        const productsFiltered = product.filter(prdt => {
+            if(prdt.price >= Number(range.min) && prdt.price <= Number(range.max))
+		return true;
+	    return false;
+	});
+
+	setProductsFiltered(productsFiltered);
+    }
+
+    const handleAddCart = product => {
+        dispatch(addCartProductThunk(product, 1));
+    }
   
   return (
     <div>
@@ -46,7 +68,7 @@ useEffect( () => {
         <Button 
           key={category.id}
           variant="primary"
-          onClick={filterClas}
+          onClick={filterByCategory}
           name={category.name}
         >
           {category.name}
@@ -55,15 +77,43 @@ useEffect( () => {
       <Button variant="light" onClick={() => dispatch(getProductsThunk())}>
         Ver todos
       </Button></div> 
-      
-        <Row xs={1} md={2} xl={4}>
+        <FormGroup>
+	    <Form.Label htmlFor="name">Filter by Name</Form.Label><Form.Control
+	        id="name"
+	        type="text"
+	        value={input}
+                onChange={event => setInput(event.target.value.toLowerCase())}
+	    />
+	    <Button variant="primary" onClick={filterByName}>Search</Button>
+	</FormGroup>
+        <FormGroup>
+	    <Form.Label htmlFor="min">Filter by Price</Form.Label><Form.Control
+	        id="min"
+	        type="number"
+	        value={range.min}
+                onChange={event => setRange({
+		    ...range,
+		    min: event.target.value
+		})}
+	    />
+	    <Form.Control
+	        id="max"
+	        type="number"
+	        value={range.max}
+                onChange={event => setRange({
+		    ...range,
+		    max: event.target.value
+		})}
+	    />
+	    <Button variant="primary" onClick={filterByPrice}>Search</Button>
+	</FormGroup>
+        <Row xs={1} md={2} xl={3}>
           {
-           productsByCategory?.map(producItem => (
+           productsFiltered?.map(producItem => (
           
           <Col key={producItem.id}>
             <Card className="container__cards">
               {/* inicio de carousel */}
-              {/* <p>{producItem.id}</p> */}
               <Carousel interval='15000'>
                   <Carousel.Item className="cards">
                     <img
@@ -103,7 +153,7 @@ useEffect( () => {
                   </Card.Text>
                   <div className="bu">
                   <Button variant="light"  as={ Link } to={`/product/${producItem.id}`}>Details</Button>
-                  <Button variant="primary"  onClick={() => dispatch(addProduct( producItem ) ) }><Cart/></Button> 
+                  <Button variant="primary"  onClick={() => handleAddCart(producItem) }><Cart/></Button> 
                   </div>
                                    
                   {/* crear condiconal para entrar al carrito */}
