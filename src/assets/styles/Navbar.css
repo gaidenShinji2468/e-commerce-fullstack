@@ -1,0 +1,13 @@
+#header .navbar-brand {
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+}
+
+#header .navbar-brand:hover, #header .nav-link:hover {
+  color: var(--bs-primary);
+}
+
+#header .nav-link {
+  color: white;
+}

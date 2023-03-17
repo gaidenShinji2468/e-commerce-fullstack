@@ -1,53 +1,34 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Table from "react-bootstrap/Table";
+import "/src/assets/styles/ModalPurchases.css";
 
 const ModalPurchases = ({ show, handleClose, data }) => {
     return (
         <div>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                    }}
-                >
+            <Modal id="modal-purchase" show={show} onHide={handleClose}>
+                <Modal.Header>
                     <Modal.Title>Electronic bill</Modal.Title>
                     <Modal.Body>
-                        <p>friend shop c.a<br />J‑29989842‑2 <br />{data.productsInCart?.createdAt.slice(0,10)}</p> 
+                        <p>{`friend shop c.a J‑29989842‑2 ${data.productsInCart?.createdAt.slice(0,10)}`}</p> 
                     </Modal.Body>
                 </Modal.Header>
-                <Modal.Body>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>product</th>
-                                <th>price</th>
-                                <th>amount</th>
-                                <th>Total to pay</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{data.title}</td>
-                                <td>{data.price}</td>
-                                <td>{data.productsInCart?.quantity}</td>
-                            <td>{data.price * data.productsInCart?.quantity}.00</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Modal.Body>
-                <Modal.Body
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <p>
-                        <strong>total paid</strong>
-                    </p>
-                    <p>{data.price * data.productsInCart?.quantity}.00</p>
+                <Modal.Body> 
+	            <div>
+	              <h5>Product</h5>
+	              <p>{data.title}</p>
+	            </div>
+	            <div>
+	              <h5>Price</h5>
+	              <p>{data.price}</p>
+	            </div>
+	            <div>
+	              <h5>Amount</h5>
+	              <p>{data.productsInCart?.quantity}</p>
+	            </div>
+	            <div>
+	              <h5>Total to pay</h5>
+	              <p>{data.price*data.productsInCart?.quantity}</p>
+	            </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

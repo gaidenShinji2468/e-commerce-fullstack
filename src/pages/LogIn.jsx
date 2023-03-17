@@ -9,8 +9,8 @@ import {setIsLogged} from "/src/store/slices/isLogged.slice";
 import {setIsLoading} from "/src/store/slices/isLoading.slice";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("ana2568@gmail.com");
+  const [password, setPassword] = useState("ana1234");
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();

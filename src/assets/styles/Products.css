@@ -1,0 +1,42 @@
+body{
+    background-color: rgba(213, 217, 218, 0.1);
+}
+
+.nav-tabs, .nav-link {
+  border-color: #222 !important;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+}
+
+.cards img{
+    padding: 5px;
+}
+
+.container__cards {
+    margin: 15px 25px;
+    height: 400px;
+}
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+}
+
+.bu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 0 20px;
+
+}
+.bu button{
+    width: 83.91px;
+}

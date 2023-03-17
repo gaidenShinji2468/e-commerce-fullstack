@@ -76,7 +76,7 @@ function Cart({
 	if(getProducts)
 	{
             setProducts(cartProducts.map(product => {
-                const productImgs = getProducts.find(getProduct => getProduct.id === product.id).productImgs;
+                const productImgs = getProducts?.find(getProduct => getProduct.id === product.id).productImgs;
 	        return {
                     ...product,
 	            productImgs

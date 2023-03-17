@@ -5,6 +5,7 @@ import ModalPurchases from "../components/ModalPurchases";
 import Container from "react-bootstrap/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserPurchasesThunk} from "/src/store/slices/userPurchases.slice";
+import "/src/assets/styles/Purchases.css";
 
 const Purchases = () => {
     const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ const Purchases = () => {
     }, []);
 
     return (
-        <Container className="my-4">
+        <Container id="purchases" className="my-4">
         <div>
             <h2>My purchases</h2>
             <hr />
@@ -31,9 +32,7 @@ const Purchases = () => {
                 purchase.cart?.products?.map((item) => (
                     <Card key={item.id} style={{margin:'1rem'}}>
                         <Card.Header>{item.productsInCart?.createdAt.slice(0,10)}</Card.Header>
-                        <Card.Body
-                            style={{ display: "flex", justifyContent: "space-around" }}
-                        >
+                        <Card.Body>
                             <Card.Text>{item.title}</Card.Text>
                             <Card.Text
                                 style={{
