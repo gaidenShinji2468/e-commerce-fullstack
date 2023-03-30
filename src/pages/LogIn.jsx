@@ -9,8 +9,8 @@ import {setIsLogged} from "/src/store/slices/isLogged.slice";
 import {setIsLoading} from "/src/store/slices/isLoading.slice";
 
 const Login = () => {
-  const [email, setEmail] = useState("ana2568@gmail.com");
-  const [password, setPassword] = useState("ana1234");
+  const [email, setEmail] = useState("gsh.testemail@gmail.com");
+  const [password, setPassword] = useState("gsh1234");
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
@@ -25,9 +25,9 @@ const Login = () => {
     };
 
     axios
-      .post("https://e-commerce-api.academlo.tech/api/v1/users/login", data)
+      .post("https://e-commerce-api-xmgi.onrender.com/api/v1/users/login", data)
       .then((resp) => {
-        localStorage.setItem("token", resp.data.data.token);
+        localStorage.setItem("token", resp.data.data);
 	dispatch(setIsLogged());
         navigate("/");
       })

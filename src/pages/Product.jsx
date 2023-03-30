@@ -21,10 +21,10 @@ const Product = () => {
     useEffect(() => {
         dispatch(setIsLoading(true));
         axios
-            .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}/`)
+            .get(`https://e-commerce-api-xmgi.onrender.com/api/v1/products/${id}/`)
             .then((resp) => {
-                setDetail(resp?.data?.data?.product);
-                filterClass(resp?.data?.data?.product.category)
+                setDetail(resp?.data?.data);
+                filterClass(resp?.data?.data.category)
             })
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));

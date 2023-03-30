@@ -31,7 +31,7 @@ const Products= () => {
   useEffect(() => {
     dispatch( getProductsThunk() )
     axios
-    .get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
+    .get(`https://e-commerce-api-xmgi.onrender.com/api/v1/categories`)
     .then(resp => {
       const stylesCpy = {
         "-1": {
@@ -40,8 +40,8 @@ const Products= () => {
 	}
       };
 
-      setCategories(resp.data.data.categories);
-      resp.data.data.categories.forEach(category => {
+      setCategories(resp.data.data);
+      resp.data.data.forEach(category => {
         stylesCpy[category.id] = {
           backgroundColor: "white",
 	  color: "#222"
@@ -55,7 +55,6 @@ const Products= () => {
   }, [] )
 useEffect( () => {
   setProductsFiltered(product)
-
 },[product]);
 
   const setTarget = id => {

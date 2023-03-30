@@ -41,13 +41,13 @@ function Cart({
 
     useEffect(() => {
 	prepareProducts();
-        setTotal(cartProducts.reduce((accum, currentValue) => accum + (Number(currentValue.price)*currentValue.productsInCart.quantity), 0));
+        setTotal(cartProducts.reduce((accum, currentValue) => accum + (Number(currentValue.product.price)*currentValue.quantity), 0));
     }, [cartProducts]);
 
     const dropProduct = id => {
 	dispatch(setIsLoading(true));
         axios
-	    .delete("https://e-commerce-api.academlo.tech/api/v1/cart/" + id, getConfig())
+	    .delete("https://e-commerce-api-xmgi.onrender.com/api/v1/cart/" + id, getConfig())
 	    .then(res => dispatch(getCartProductsThunk()))
 	    .catch(err => console.log(err.response))
 	    .finally(() => dispatch(setIsLoading(false)));
@@ -73,7 +73,7 @@ function Cart({
     }
 
     const prepareProducts = () => {
-	if(getProducts)
+	/*if(getProducts)
 	{
             setProducts(cartProducts.map(product => {
                 const productImgs = getProducts?.find(getProduct => getProduct.id === product.id).productImgs;
@@ -82,11 +82,11 @@ function Cart({
 	            productImgs
 	        };
 	    }));
-	}
+	}*/setProducts(cartProducts)
     }
 
     const handleUpdateQuantity = (operation, product) => {
-        let newQuantity = product.productsInCart.quantity;
+        let newQuantity = product.quantity;
 
 	if(operation == "subs")
 	{
@@ -113,14 +113,14 @@ function Cart({
 				    id="card-item"
 				    key={index}
 				>
-				    <span id="quantity">{product.productsInCart.quantity}</span>
+				    <span id="quantity">{product.quantity}</span>
 				    <div id="item-data"><figure
 				        id="card-img"
-				        onClick={() => handleNavigate(`/product/${product.id}`)}
+				        onClick={() => handleNavigate(`/product/${product.product.id}`)}
 				    >
-				    <img src={product?.productImgs[0]} alt={`This is a ${product.title} image`}/>
-					<figcaption>{product.title}</figcaption>
-				        <span>Price</span><span>{`$${product.price}`}</span>
+				    <img src={product.product?.productImgs[0]} alt={`This is a ${product.product.title} image`}/>
+					<figcaption>{product.product.title}</figcaption>
+				        <span>Price</span><span>{`$${product.product.price}`}</span>
 				    </figure>
 				    <span
 				        id="substract-product"
